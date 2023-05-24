@@ -114,7 +114,7 @@ public class ContainViewController: UIViewController {
         
     }
     
-    private var navViewController:ContainNavigationController!
+    public var navViewController:ContainNavigationController!
     
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -177,12 +177,12 @@ public class ContainViewController: UIViewController {
 }
 
 // MARK: ContainNavigationController
-class ContainNavigationController: UINavigationController {
-    override func viewDidLoad() {
+public class ContainNavigationController: UINavigationController {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         
     }
-    override func viewDidAppear(_ animated: Bool) {
+    public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if barStyle == .clear {
             // 适配iOS13以下系统, 在viewWillAppear设置无效
@@ -191,15 +191,15 @@ class ContainNavigationController: UINavigationController {
         
     }
     
-    override func popViewController(animated: Bool) -> UIViewController? {
+    public override func popViewController(animated: Bool) -> UIViewController? {
         return navigationController?.popViewController(animated: animated)
     }
     
-    override func popToRootViewController(animated: Bool) -> [UIViewController]? {
+    public override func popToRootViewController(animated: Bool) -> [UIViewController]? {
         return navigationController?.popToRootViewController(animated: animated)
     }
     
-    override func popToViewController(_ viewController: UIViewController, animated: Bool) -> [UIViewController]? {
+    public override func popToViewController(_ viewController: UIViewController, animated: Bool) -> [UIViewController]? {
         let jtNav = viewController.st.navigationController
         let index = jtNav?.st.viewControllers.firstIndex(of: viewController) ?? 0
         guard let rawVC = jtNav?.viewControllers[index] else {
@@ -208,7 +208,7 @@ class ContainNavigationController: UINavigationController {
         return navigationController?.popToViewController(rawVC, animated: animated)
     }
     
-    override func pushViewController(_ viewController: UIViewController, animated: Bool) {
+    public override func pushViewController(_ viewController: UIViewController, animated: Bool) {
         var _viewController = viewController
         _viewController.st.navigationController = navigationController as? STNavigationController
         
@@ -224,7 +224,7 @@ class ContainNavigationController: UINavigationController {
         navigationController?.popViewController(animated: true)
     }
     
-    override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
+    public override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
         navigationController?.dismiss(animated: flag, completion: completion)
         var fist = viewControllers.first
         fist?.st.navigationController = nil
